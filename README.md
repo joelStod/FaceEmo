@@ -29,7 +29,7 @@ Branches:
 =========
 master is current version
 
-addRT will add reaction time data. Theoretical and math are laid out by Mr. Paskewitz and based in linear ballistic modeling.
+addRT will add reaction time data. Theoretical and math are laid out by Mr. Paskewitz and based in linear ballistic accumulation modeling of RT.
 
 Notes:
 ======
