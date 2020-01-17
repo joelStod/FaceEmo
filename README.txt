@@ -6,7 +6,7 @@ To Version 1.2, model development and fits were tested yielding maximum likeliho
 
 Major differences from prior versions are the removal of normalization from the activation matrix initialization. The normalization procedure divided an activation guassian by the sum of all gaussians and biased activation at the edges. 
 
-We also examine the effects on weight matrix updates from extreme morphs yielding a limit of s at 1 which is based on feedback. Full notes on this are added in "ExaminingS". 
+We also examine the effects on weight matrix updates from extreme morphs yielding a limit of s at 1 which is based on feedback. Full notes on this are added in "BoundsOfS". 
 
 Finally, Version 1.3 is refactored. A minor bug in assignment of angry to happy choices for some extreme values.
 
