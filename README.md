@@ -1,8 +1,7 @@
 # FaceEmo
 Computational model of associative learning of categorical identification of face emotions.
 
-
-Version 1.3
+  Version 1.3
 
 Change log:
 ===========
@@ -25,6 +24,12 @@ fitIBT calls other functions depending on user preferences, including models, wh
 Asymmetric learning is shown in modA
 
 All scripts and example graphs may be opened in MatLab.
+
+Branches:
+=========
+master is current version
+
+addRT will add reaction time data. Theoretical and math are laid out by Mr. Paskewitz and based in linear ballistic modeling.
 
 Notes:
 ======
