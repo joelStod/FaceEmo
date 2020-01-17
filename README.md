@@ -24,4 +24,6 @@ fitIBT calls other functions depending on user preferences, including models, wh
 
 Asymmetric learning is shown in modA
 
+Notes:
+======
 Note that an expected behavior of the model is that there is a category boundary and there will be a high-contrast bend in the weight matrix about this boundary. Model is trying to learn responses about the category boundary. Because of the generalization the weight matrix is smoothed. It creates a strong contrast right before the boundary. It emphasizes the contrast right before the smoothing. 
