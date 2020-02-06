@@ -13,7 +13,7 @@ Major differences from prior versions are the removal of normalization from the 
 
 We also examine the effects on weight matrix updates from extreme morphs yielding a limit of s at 1 which is based on feedback. Full notes on this are added in "BoundsOfS". 
 
-Finally, Version 1.3 is refactored. A minor bug in assignment of angry to happy choices for some extreme values.
+Finally, Version 1.3 is refactored and has a minor bug fix in assignment of angry to happy choices for some extreme values.
 
 Files:
 ======
