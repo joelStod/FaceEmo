@@ -1,7 +1,7 @@
 # FaceEmo
 Computational model of associative learning of categorical identification of face emotions.
 
-  Version 1.3
+  Version 1.4
 
 Change log:
 ===========
