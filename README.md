@@ -5,25 +5,29 @@ Computational model of associative learning of categorical identification of fac
 
 Change log:
 ===========
-See scripts for details of changes for each script, especially fitibt
+% 1.1       Initial attempt with base code and sum of squares fitting.
+% 1.2rm     Addition of random starts as well as maximum likelihood fit.
+%           Bayesean test with beta distribution (failed but left in)
+% 1.3       Removal of normalization because normalization emphasizes
+%           extreme morphs.
+%           Option: Normalization commented out in two places. Noted with 'normalize'.
+%           Bound s, epsilon, and sigma starting values adjusted to avoid false starts.
+%           Add weight, choiceprob, and output graphs by trial for QC. 
+%           Refactoring code for maintenance.
+% 1.4       Estimation of learning rate is now adjusted by sigma, 
+%               yielding the maximimum effective learning rate. 
+%           Option: Evaluate estimation of initial weights as a logistic or linear by commented code.
 
-To Version 1.2, model development and fits were tested yielding maximum likelihood fits and the use of a guessing parameter.
-
-Major differences from prior versions are the removal of normalization from the activation matrix initialization. The normalization procedure divided an activation guassian by the sum of all gaussians and biased activation at the edges. 
-
-We also examine the effects on weight matrix updates from extreme morphs yielding a limit of s at 1 which is based on feedback. Full notes on this are added in "BoundsOfS". 
-
-Finally, Version 1.3 is refactored and has a minor bug fix in assignment of angry to happy choices for some extreme values.
 
 Files:
 ======
-Scripts with the prefix "w" are simply wrappers that translate data from different projects and call fitIBT. 
+Scripts with the prefix "w" are simply wrappers that translate data from different projects and call minimizeFit,
+wPostfMRI used in Stoddard et al., 2023 is included as an example.
 
-fitIBT calls other functions depending on user preferences, including models, which begin with the prefix "mod."
+minimizeFit calls other functions depending on user preferences, including models, which begin with the prefix "mod." 
+Version 1.4 is included here, though an example of assymmetric learning is shown in modA.
 
-Asymmetric learning is shown in modA
-
-All scripts and example graphs may be opened in MatLab.
+All scripts and example graphs (with .fig extension) may be opened in MatLab.
 
 Branches:
 =========
