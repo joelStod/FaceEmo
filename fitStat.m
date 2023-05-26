@@ -1,7 +1,7 @@
-% generate fit statistic
-function fit = fitmod(block,stim,cho,rew,params)
+% Generate and return a ML fit statistic for any chosen model
+function fit = fitStat(block,stim,cho,rew,params)
 
-choiceprob = mod1(block,stim,cho,rew,params);
+choiceprob = mod1_4(block,stim,cho,rew,params);
 
 % ML Fit
 % Sum model’s log probability for the subject’s choice in each trial

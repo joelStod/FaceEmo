@@ -9,7 +9,7 @@
 % Initialize
 iters = 1000;
 
-X=readmatrix('LearnParamsPostfMRI.txt'); % omit header row
+X=readmatrix('LearnParamsPostfMRI_mod1_gA_gH.txt'); % omit header row
 
 for h = 1:max(unique(X(:,1)))
     if ~ismember(h,X(:,1)) % Allow nonsequential or missing integers in Obs
@@ -17,14 +17,14 @@ for h = 1:max(unique(X(:,1)))
     end
     k = X(:,1)==h;
     demograph=X(k,1:4);
-    mpheight=zeros(iters,14);
+    mpheight=zeros(iters,15);
     for j=1:iters
-        disp(sprintf('%s%i%s%i','Obs:',h,' Iter:',j));
+        fprintf('%s%i%s%i\n','Obs:',h,' Iter:',j);
         disp('Input Params');
-        disp(X(k,[5:10,14]));
-        sData = simData(X(k,[5:10,14]));
+        disp(X(k,[5:11,15]));
+        sData = simData(X(k,[5:11,15]));
         [mparams,fit,Ind_pre,Ind_post,trainThresh] = ...
-            fitibt(h,'off',sData(:,1),sData(:,2),sData(:,3),sData(:,4));
+            fitibt_mod1_gA_gH(h,'off',sData(:,1),sData(:,2),sData(:,3),sData(:,4));
         disp('Output Params');
         disp([mparams,trainThresh]);
         mpheight(j,:)=[demograph(1,:),mparams,fit,Ind_pre,Ind_post,trainThresh];

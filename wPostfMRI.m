@@ -12,8 +12,7 @@ for h = 1:max(unique(X(:,1)))
     end
     
     k = X(:,1)==h;
-    disp('Observation Number');
-    disp(h);
+    disp(['Observation: ',num2str(h)]);
     time1 = datetime;
     
     % Pass the face morph task data
@@ -21,8 +20,8 @@ for h = 1:max(unique(X(:,1)))
     %       face (k,7) = morph condition (1-15)
     %       choice (k,8) = answered happy(0) or angry(1)
     %       feedback (k,9) = actual feedback (0=negative / 1=positive)
-    [mparams,fit,Ind_pre,Ind_post,trainThresh] = ...
-        fitibt(h,'on',X(k,5),X(k,7),X(k,8),X(k,9));
+    [mparams,fit,numFit,Ind_pre,Ind_post,trainThresh,epsilon] = ...
+        minimizeFit(h,'on',X(k,5),X(k,7),X(k,8),X(k,9));
     demograph=X(k,1:4);
     % demograph = Obs, SubjID, Session, Group
     % mparams = sigma, theta, epsilon angry, p, s, g
@@ -36,7 +35,8 @@ for h = 1:max(unique(X(:,1)))
     dur = seconds(time2-time1);
     
     % Write demograph, mparams, duration (s)
-    mpheight(h,:)=[demograph(1,:),mparams,fit,Ind_pre,Ind_post,trainThresh,dur];
+    mpheight(h,:) = ...
+        [demograph(1,:),mparams,fit,numFit,Ind_pre,Ind_post,trainThresh,dur,epsilon];
     clear mparams; clear out; clear fit; clear demograph;
 end
 

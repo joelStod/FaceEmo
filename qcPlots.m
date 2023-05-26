@@ -3,28 +3,32 @@ function figH = qcPlots(figH,mparams,block,stim,cho,rew);
 % Parameters
 theta = mparams(2);
 p = mparams(4); 
-s = mparams(5); 
-g= mparams(6);
+s = mparams(5);
+gA = mparams(6);
+gH = mparams(7);
 
 % Learn
-[choiceprob, trlwt, trlout, w, a] = mod1(block,stim,cho,rew,mparams);
+[choiceprob, trlwt, trlout, w, a] = mod1_4(block,stim,cho,rew,mparams);
 
 % Calculate choice probabilties before and after training 
+preW=zeros(15,2); %possible nodes
 for i=1:15 
-    preW(i,1) = s*(i-p); 
-    preW(i,2) = s*(p-i); 
+    preW(i,1) = s*(i-p); %angry (first column)
+    preW(i,2) = s*(p-i); %happy (second column)
 end
+
 preChoP=zeros(15,2);
 postChoP=zeros(15,2); 
 for i=1:15
     output = a(i,:) * preW; 
-    preChoP(i,1)=(1-2*g)*(exp(theta*output(1))/sum(exp(theta*output)))+g; 
-    preChoP(i,2)=(1-2*g)*(exp(theta*output(2))/sum(exp(theta*output)))+g;
+    preChoP(i,1)=(1-gA-gH)*(exp(theta*output(1))/sum(exp(theta*output)))+gH; 
+    preChoP(i,2)=(1-gA-gH)*(exp(theta*output(2))/sum(exp(theta*output)))+gH;
     
     output = a(i,:) * w; 
-    postChoP(i,1)=(1-2*g)*(exp(theta*output(1))/sum(exp(theta*output)))+g; 
-    postChoP(i,2)=(1-2*g)*(exp(theta*output(2))/sum(exp(theta*output)))+g;
+    postChoP(i,1)=(1-gA-gH)*(exp(theta*output(1))/sum(exp(theta*output)))+gH; 
+    postChoP(i,2)=(1-gA-gH)*(exp(theta*output(2))/sum(exp(theta*output)))+gH;
 end
+
 
 % Pre-post choice probabilities
 figH(2)=figure(2);clf;
@@ -89,8 +93,9 @@ grp=[repmat('c',n,1); repmat('p',n,1)];
 figH(4)=figure(4);clf;
 t=tiledlayout(3,1);
 ax1=nexttile;
-gscatter([1:n 1:n]',choices,grp,'rb','..',8,'off');
+gscatter([1:n 1:n]',choices,grp,'rb','..',10,'off');
 % scatter of stimuli x response probability
+ylim([0 1]);
 xlim([0 n]);
 xticks(0:15:n);
 xticklabels(0:1:15);
@@ -103,7 +108,7 @@ title('Choice Probabilities Across the Task');
 ylabel('Choice Probability');
 
 ax2=nexttile;
-gscatter([1:n 1:n]',weights,grp,'rb','..',8,'off');
+gscatter([1:n 1:n]',weights,grp,'rb','..',10,'off');
 xlim([0 n]);
 xticks(0:15:n);
 xticklabels(0:1:15);
@@ -112,11 +117,12 @@ for i=0:15:n
         xline(i);
     end
 end
-title('Weights Differences Across the Task');
+yline(0);
+title('Weight Differences Across the Task');
 ylabel('Angry-Happy Weight');
 
 nexttile;
-gscatter([1:n 1:n]',outputs,grp,'rb','..',8,'off');
+gscatter([1:n 1:n]',outputs,grp,'rb','..',10,'off');
 xlim([0 n]);
 xticks(0:15:n);
 xticklabels(0:1:15);
